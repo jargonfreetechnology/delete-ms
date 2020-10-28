@@ -1,6 +1,6 @@
 *.md
 *.txt
-init.sh
+*.sh
 *.original
 dev_pom.xml
 prod_pom.xml
