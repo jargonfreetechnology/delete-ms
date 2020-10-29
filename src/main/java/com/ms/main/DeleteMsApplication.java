@@ -8,15 +8,21 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import brave.sampler.Sampler;
+
 @SpringBootApplication
-@EnableDiscoveryClient
 @ComponentScan({"com.acontroller", "com.bservice"})
 @EnableJpaRepositories("com.cdao")
 @EntityScan("com.domain")
-@EnableFeignClients("com.proxy")                  //will scan the packages for classes annotated with @FeignClient
+@EnableDiscoveryClient
+@EnableFeignClients("com.proxy") //will scan the packages for feign clients(classes annotated with @FeignClient)
 public class DeleteMsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DeleteMsApplication.class, args);
+	}
+
+	public Sampler defaultSampler() {
+		return Sampler.ALWAYS_SAMPLE;
 	}
 }
